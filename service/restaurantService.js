@@ -5,6 +5,9 @@
 	var error = require('./error')
 	restaurantService.createRestaurant = function(restaurantObject, callback){
 		console.log("In createRestaurant Service");
+        if(restaurantObject.name === undefined) {
+            callback(error.badRequest, null); return;
+        }
 		restaurantObject.save(function(err, restaurantCreateResponse) {
 			if(err) {
 				callback(err); return;

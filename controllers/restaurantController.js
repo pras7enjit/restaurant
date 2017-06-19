@@ -59,6 +59,10 @@ module.exports = {
         });
         restaurantService.createRestaurant(restaurant, function(err) {
             if(err) {
+                if(err.errorCode!== undefined) {
+                    console.log("custom err", err)
+                    return res.status(err.errorCode).json(err);
+                }
                 next(err); return;
             }
             res.end();
