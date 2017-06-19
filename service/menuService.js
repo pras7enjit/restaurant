@@ -6,47 +6,45 @@
 	/*Create Menu*/
 	menuService.createMenu = function(menuObj, callback){
 		console.log("In createMenu Service", menuObj);
-		menuModel
-		.findOne({restaurantId: menuObj.restaurantId})
-		.exec(function(err, menuResponse) {
+		menuService.getMenuOfRestaurant(menuObj.restaurantId, function(err, restaurantResponse) {
 			if(err) {
 				callback(err); return;
 			}
-			if(!menuResponse) {
-				menuObj.save(function (err, menu) {
-		            if (err) {
-		                callback(err); return;
-		            }
-		            callback();
-		        });
-			}
-			else {
-				// console.log("err in service", error.menuExits)
-				callback(error.menuExits, null); return;
-			}
+			menuModel
+			.findOne({restaurantId: menuObj.restaurantId})
+			.exec(function(err, menuResponse) {
+				if(err) {
+					callback(err); return;
+				}
+				if(!menuResponse) {
+					menuObj.save(function (err, menu) {
+			            if (err) {
+			                callback(err); return;
+			            }
+			            callback();
+			        });
+				}
+				else {
+					// console.log("err in service", error.menuExits)
+					callback(error.menuExits, null); return;
+				}
+			})
 		})
-		// menuObj.save(function (err, menu) {
-  //           if (err) {
-  //               callback(err); return;
-  //           }
-  //           callback();
-  //       });
 	}
 
 	menuService.getMenuOfRestaurant = function(restaurantId, callback) {
 		console.log("In get Menu Of Restaurant Service");
 		restaurantModel
-		.findOne({id: restaurantId})
+		.findOne({_id: restaurantId})
 		.exec(function(err, restaurantResponse) {
+			console.log("restaurantResponse -=-=-=>", restaurantResponse);
 			if(err) {
 				callback(err); return;
 			}
 			if(!restaurantResponse) {
-				callback(error.noMenu, null); return;
+				callback(error.notFound, null); return;
 			}
-
-
+			callback(null, restaurantResponse)
 		})
-
 	}
 })(module.exports);

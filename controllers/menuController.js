@@ -93,17 +93,19 @@ module.exports = {
     /**
      * menuController.update()
      */
-    update: function (req, res) {
+    update: function (req, res, next) {
         var id = req.params.id;
         menuModel.findOne({restaurantId: id}, function (err, menu) {
             if (err) {
                 return res.status(500).json({
+                    errorCode: 500,
                     message: 'Error when getting menu',
-                    error: err
                 });
+                // next(err);return;
             }
             if (!menu) {
                 return res.status(404).json({
+                    errorCode: 404,
                     message: 'No such menu'
                 });
             }
@@ -122,9 +124,11 @@ module.exports = {
             menu.save(function (err, menu) {
                 if (err) {
                     return res.status(500).json({
+                        errorCode: 500,
                         message: 'Error when updating menu.',
-                        error: err
+                        //error: err
                     });
+                    // next(err);
                 }
 
                 return res.json(menu);

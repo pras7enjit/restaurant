@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var restaurantController = require('../controllers/restaurantController.js');
 
+var authUtils = require('../utils/authUtils')
+
 /*
  * GET
  */
@@ -15,7 +17,7 @@ router.get('/:id', restaurantController.show);
 /*
  * POST
  */
-router.post('/', restaurantController.create);
+router.post('/', authUtils.isAuthenticated, restaurantController.create);
 
 /*
  * PUT

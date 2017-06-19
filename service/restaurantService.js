@@ -2,7 +2,7 @@
 	// body...
 	var restaurantModel = require('../models/restaurantModel');
 	var menuModel = require('../models/menuModel.js');
-	var error = require('./error')
+	var error = require('./error');
 	restaurantService.createRestaurant = function(restaurantObject, callback){
 		console.log("In createRestaurant Service");
         if(restaurantObject.name === undefined) {
@@ -41,7 +41,7 @@
             		callback(err); return;
             	}
             	if (!menuResponse) {
-            		callback(error.noMenu, null); return;
+            		callback(error.notFound, null); return;
             	}
             	console.log("menuResponse ", menuResponse)
             	allmenu.beverages = menuResponse.beverages;
