@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var menuController = require('../controllers/menuController.js');
-
+var authUtils = require('../utils/authUtils')
 /*
  * GET
  */
@@ -15,7 +15,7 @@ router.get('/:id', menuController.show);
 /*
  * POST
  */
-router.post('/create/:id', menuController.create);
+router.post('/create/:id', authUtils.isAuthenticated, menuController.create);
 
 /*
  * PUT

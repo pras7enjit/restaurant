@@ -47,24 +47,43 @@
 			}
 			else {
 				// callback(error.badRequest, null); return;
-				reviewModel.findOne({customerId: successResponse._id})
+				reviewModel.findOne({customerId: successResponse._id, restaurantId: restaurantId})
 				.exec(function(err, reviewResponse) {
 					if(err) {
 						callback(err); return;
 					}
+
+					// console.log('reviewResponse ', reviewResponse)
 					if(!reviewResponse) {
-						callback(error.badRequest, null); return;
+						// callback(error.badRequest, null); return;
+						console.log('customerObject ', customerObject)
+						review.restaurantId = restaurantId ? restaurantId : undefined;
+						review.rating = customerObject.rating ? customerObject.rating : undefined;		
+						review.comment = customerObject.comment ? customerObject.comment : undefined;
+						review.updated = NOW;
+						review.created = NOW;
+						var reviewModelObject = new reviewModel(review);
+						console.log('reviewModelObject ', reviewModelObject)
+						reviewModelObject.save(function(err, reviewCreateResponse) {
+							if(err) {
+								callback(err); return;
+							}
+							callback(null, reviewCreateResponse); return;
+						})
 					}
-					reviewResponse.rating = customerObject.rating ? customerObject.rating : undefined;		
-					reviewResponse.comment = customerObject.comment ? customerObject.comment : undefined;
-					reviewResponse.updated = NOW;
-					reviewResponse.created = NOW;
-					reviewResponse.save(function(err, reviewUpdateResponse) {
-						if(err) {
-							callback(err); return;
-						}
-						callback(null, reviewUpdateResponse);
-					})
+					else
+					{
+						reviewResponse.rating = customerObject.rating ? customerObject.rating : undefined;		
+							reviewResponse.comment = customerObject.comment ? customerObject.comment : undefined;
+							reviewResponse.updated = NOW;
+							reviewResponse.created = NOW;
+							reviewResponse.save(function(err, reviewUpdateResponse) {
+								if(err) {
+									callback(err); return;
+								}
+								callback(null, reviewUpdateResponse);
+							})
+					}
 				})
 			}		
 		})
