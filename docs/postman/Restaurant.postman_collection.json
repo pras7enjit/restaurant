@@ -1,0 +1,163 @@
+{
+	"id": "55f01ab2-4a5c-2c43-bfcb-71b62167f52d",
+	"name": "Restaurant",
+	"description": "",
+	"order": [
+		"34301d48-b324-8657-4078-b662eeab917e",
+		"4e0cfa31-7521-8fe9-1f94-d0e7ef70b1f9",
+		"5d18343b-0721-27b0-a5da-0a9bc56276ed",
+		"affc724e-fd38-443d-0f18-a384d895fcc7",
+		"57d110ba-11b2-13b8-597a-846699f01c3a"
+	],
+	"folders": [],
+	"timestamp": 1497628992330,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "34301d48-b324-8657-4078-b662eeab917e",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{host}}:{{port}}/restaurants",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "55f01ab2-4a5c-2c43-bfcb-71b62167f52d",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Create Restaurant",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1497629032903,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\"name\" : \"CCD\",\n\t\"address\" : \"WhiteField\",\n\t\"branch\": \"WhiteField\",\n\t\"isClosed\" : false\n}"
+		},
+		{
+			"id": "4e0cfa31-7521-8fe9-1f94-d0e7ef70b1f9",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{host}}:{{port}}/menu/create/5943fd9467af5a599b45c043",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1497779531320,
+			"name": "Create menu",
+			"description": "",
+			"collectionId": "55f01ab2-4a5c-2c43-bfcb-71b62167f52d",
+			"responses": [],
+			"rawModeData": "{\n\t\"beverages\" : [\n        {\"name\":\"virgin mojito\", \"price\": \"110\"}, \n        {\"name\":\"lime soda\", \"price\":80}\n    ], \n    \"deserts\" : [\n        {\"name\" : \"ices vanila\", \"price\": 150}, \n        {\"name\":\"ice chocolate\", \"price\": 200}\n    ], \n    \"mainCourseNonVeg\" : [\n        {\"name\":\"burger chicken tikka\", \"price\":250}, \n        {\"name\":\"burger chicken cutlet\", \"price\":200}, \n        {\"name\":\"burger shredded chicken\", \"price\":210} \n    ], \n    \"mainCourseVeg\" : [\n        {\"name\":\"veg burger paneer tikka\", \"price\":210}, \n        {\"name\":\"veg burger paneer cutlet\", \"price\":200}, \n        {\"name\":\"veg burger mix tikka\", \"price\":250}\n    ], \n    \"statersNonVeg\" : [\n\n    ], \n    \"statersVeg\" : [\n\n    ], \n    \"snacks\" : [\n        {\"name\":\"cookies\", \"price\":150}, \n        {\"name\":\"muffins\", \"price\":210}\n    ]\n}"
+		},
+		{
+			"id": "57d110ba-11b2-13b8-597a-846699f01c3a",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{host}}:{{port}}/reviews/restaurant/5943fd9467af5a599b45c043",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "55f01ab2-4a5c-2c43-bfcb-71b62167f52d",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Post rating",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1497840075122,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\"name\" : \"Anb\",\n\t\"email\" : \"Anb@gmail.com\",\n\t\"phone\" : \"098765432\",\n\t\"address\" : \"#23 abc colony, Rt nagar, Bangalore\",\n\t\"DOB\" : \"1991-09-09\",\n\t\"rating\" : 5\n}"
+		},
+		{
+			"id": "5d18343b-0721-27b0-a5da-0a9bc56276ed",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{host}}:{{port}}/menu/restaurant/5943fd9467af5a599b45c043",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "PUT",
+			"collectionId": "55f01ab2-4a5c-2c43-bfcb-71b62167f52d",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Update Menu",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1497780317295,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\"statersNonVeg\" : [\n\t\t{\"name\":\"chiken lolipop\", \"price\":300},\n\t\t{\"name\":\"Chicken drum stick\", \"price\":350}\n    ], \n    \"statersVeg\" : [\n    \t{\"name\":\"French Fries\", \"price\":150},\n    \t{\"name\":\"Veg cutlet \", \"price\":200}\n\n    ]\n}"
+		},
+		{
+			"id": "affc724e-fd38-443d-0f18-a384d895fcc7",
+			"headers": "",
+			"headerData": [],
+			"url": "{{host}}:{{port}}/restaurants/5943fd9467af5a599b45c043",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "55f01ab2-4a5c-2c43-bfcb-71b62167f52d",
+			"data": null,
+			"dataMode": "params",
+			"name": "Restaurant Details",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1497782856352,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		}
+	]
+}
