@@ -57,7 +57,7 @@ module.exports = {
 			created : NOW,
 			updated : NOW
         });
-        restaurantService.createRestaurant(restaurant, function(err) {
+        restaurantService.createRestaurant(restaurant, function(err, restaurantResponse) {
             if(err) {
                 if(err.errorCode!== undefined) {
                     console.log("custom err", err)
@@ -65,7 +65,7 @@ module.exports = {
                 }
                 next(err); return;
             }
-            res.end();
+            return res.status(201).json(restaurantResponse);
         })
         // restaurant.save(function (err, restaurant) {
         //     if (err) {

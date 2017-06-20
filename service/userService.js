@@ -10,6 +10,11 @@
 		console.log("In createUser service");
 		var sessionObj = {};
 		var NOW = new Date();
+		var a = new Date();
+		sessionObj.expiry = a.setDate(a.getDate() + 1);
+		sessionObj.token = tokgen2.generate();
+		sessionObj.created = NOW;
+		sessionObj.updated = NOW;
 		userObj.save(function (err, user) {
             if (err) {
                 // return res.status(500).json({
@@ -19,10 +24,10 @@
                 callback(err); return;
             }
 			sessionObj.userId = userObj._id;
-			sessionObj.token = tokgen2.generate();
-			sessionObj.created = NOW;
-			sessionObj.updated = NOW;
-			sessionObj.expiry = NOW.setDate(NOW.getDate(1)).setHours(23).setMinutes(59).setSeconds(59);
+			// sessionObj.token = tokgen2.generate();
+			// sessionObj.created = NOW;
+			// sessionObj.updated = NOW;
+			// sessionObj.expiry = a.setDate(a.getDate() + 1);
 			var sessionModel = new session(sessionObj);
 			sessionModel.save(function(err, sessionSuccess) {
 				if(err) {

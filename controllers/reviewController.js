@@ -26,11 +26,19 @@ module.exports = {
     /**
      * reviewController.show()
      */
-    show: function (req, res) {
+    show: function (req, res, next) {
         var restaurantId = req.params.id;
         reviewService.viewRatingOfRestaurant(restaurantId, function(err, reviewResponse) {
             if(err) {
-                next(err); return
+                if(err.errorCode!== undefined) {
+                    console.log("custom err", err)
+                    return res.status(err.errorCode).json(err);
+                }
+                return res.status(500).json({
+                    message: 'Error when getting review.',
+                    error: err
+                });
+                // next(err); return
             }
             return res.status(200).json(reviewResponse);
         })
@@ -120,6 +128,10 @@ module.exports = {
         var restaurantId = req.params.id;
         reviewService.reviewRestaurant(req.body, restaurantId, function(err, reviewResponse) {
             if(err) {
+                if(err.errorCode!== undefined) {
+                    console.log("custom err", err)
+                    return res.status(err.errorCode).json(err);
+                }
                 next(err); return
             }
             return res.status(202).json(reviewResponse);

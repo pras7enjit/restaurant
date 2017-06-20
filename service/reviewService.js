@@ -2,6 +2,7 @@
 	// declararion
 	var customerModel = require('../models/customerModel');
 	var reviewModel = require('../models/reviewModel');
+	var restaurantModel = require('../models/restaurantModel')
 	var error = require('./error');
 	// body...
 	reviewService.reviewRestaurant = function(customerObject, restaurantId, callback) {
@@ -26,7 +27,10 @@
 		review.updated = NOW;
 		review.created = NOW;
 		var customerModelObject = new customerModel(customerDetail);
-		reviewService.findCustomerByEmail(customerDetail.email, function(err, successResponse) {
+		reviewService.findCustomerByEmail(customerDetail.email, restaurantId, function(err, successResponse) {
+			if(err) {
+				callback(err, null)
+			}
 			if(!successResponse) {
 				customerModelObject.save(function(err, customerCreateResponse) {
 					if(err){
@@ -109,21 +113,33 @@
 			callback(null, ratingResponse);
 		})
 	}
-	reviewService.findCustomerByEmail = function(email, callback) {
-		customerModel.findOne({email: email.toLowerCase()})
-		.exec(function(err, getCustomer) {
+	reviewService.findCustomerByEmail = function(email, restaurantId, callback) {
+		restaurantModel.findOne({_id: restaurantId})
+		.exec(function(err, restaurantResponse) {
 			if(err) {
 				callback(err); return;
 			}
-			if(!getCustomer) {
-				// callback(error.customerDuplicate, null); return
-				callback(null, null)
+			console.log("restaurantResponse", restaurantResponse)
+			if(!restaurantResponse) {
+				callback(error.notFound, null); return;
 			}
-			else {
-				console.log("When customer rating exits")
-				callback(null, getCustomer)
-			}
-			
+			console.log("ok")
+			customerModel.findOne({email: email.toLowerCase()})
+			.exec(function(err, getCustomer) {
+				if(err) {
+					callback(err); return;
+				}
+				if(!getCustomer) {
+					// callback(error.customerDuplicate, null); return
+					callback(null, null)
+				}
+				else {
+					console.log("When customer rating exits")
+					callback(null, getCustomer)
+				}
+				
+			})
 		})
+		
 	}
 })(module.exports)

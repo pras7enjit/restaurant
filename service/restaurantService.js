@@ -12,7 +12,7 @@
 			if(err) {
 				callback(err); return;
 			}
-			callback()
+			callback(null, restaurantCreateResponse)
 		})
 	}
 
@@ -40,18 +40,24 @@
             	if(err) {
             		callback(err); return;
             	}
+                console.log("menuResponse =-=-=-> ", menuResponse)
             	if (!menuResponse) {
-            		callback(error.notFound, null); return;
+            		// callback(error.notFound, null); return;
+                    // console.log("menuResponse ", menuResponse)
+                    restaurantJsonResponse.menu = allmenu;
+                    
             	}
-            	console.log("menuResponse ", menuResponse)
-            	allmenu.beverages = menuResponse.beverages;
-            	allmenu.deserts = menuResponse.deserts;
-            	allmenu.mainCourseNonVeg = menuResponse.mainCourseNonVeg;
-            	allmenu.mainCourseVeg = menuResponse.mainCourseVeg;
-            	allmenu.statersNonVeg = menuResponse.statersNonVeg;
-            	allmenu.statersVeg = menuResponse.statersVeg;	
-            	allmenu.snacks = menuResponse.snacks;
-            	restaurantJsonResponse.menu = allmenu;
+                else {
+                    allmenu.beverages = menuResponse.beverages;
+                    allmenu.deserts = menuResponse.deserts;
+                    allmenu.mainCourseNonVeg = menuResponse.mainCourseNonVeg;
+                    allmenu.mainCourseVeg = menuResponse.mainCourseVeg;
+                    allmenu.statersNonVeg = menuResponse.statersNonVeg;
+                    allmenu.statersVeg = menuResponse.statersVeg;   
+                    allmenu.snacks = menuResponse.snacks;
+                    restaurantJsonResponse.menu = allmenu;
+                }
+            	
             	console.log("restaurant -=-=-=-=>", restaurantJsonResponse)
             	callback(null, restaurantJsonResponse);
             })
